@@ -2,9 +2,13 @@
 How to run this application?
 
 this Application Can Be run by:
-In the project directory, run this commands
+
+In the project directory, run this commands:
+
 $ npm install
-then 
+
+then :
+
 $ npm start
 
 The application consist of two screens: Login & Dashboard.
