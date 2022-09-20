@@ -39,9 +39,6 @@ const articlesSlice = createSlice({
       state.displayedArticles = [];
       state.page = 0;
       state.isSearchMode = false;
-      //state = undefined;
-      // console.log("logOut");
-      // console.log(state.page);
     },
   },
 });

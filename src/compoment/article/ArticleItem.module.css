@@ -6,25 +6,19 @@
     border-radius: 12px;
     text-align: center;
     color: rgb(228, 228, 228);
-    
-    
   }
  
   .article h2 {
     font-size: 2rem;
     color: #f7e702;
   }
-  .naviator {
+  .notfound{
     margin: 5rem auto;
     width: 60%;
-    
     text-align: center;
    }
-  .naviator button {
-    margin: 1rem;
-    padding: 0.5em;
-    background-color: #f7e702;
-    width: 30%;
+  .emptyItem{
+    height: 70px;
   }
   .article h3 {
     color: #eccf77;

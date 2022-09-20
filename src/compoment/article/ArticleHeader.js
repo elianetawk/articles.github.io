@@ -1,7 +1,7 @@
 import classes from "./ArticleHeader.module.css";
 import SearchField from "./SearchField";
 import { useSelector } from "react-redux";
-
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { articlesActions } from "../../store";
 
@@ -9,17 +9,9 @@ const ArticleHeader = (props) => {
   const articles = useSelector((state) => state.articles.articles);
   const dispatch = useDispatch();
   const onChangeSearch = (text) => {
-    // if (text === "") {
     filterArticle(text);
-    // }
     dispatch(articlesActions.storeIsSearchMode(text !== ""));
   };
-  // const onSubmitSearch = (text) => {
-  //   if (text !== "") {
-  //     filterArticle(text);
-  //   }
-  //   dispatch(articlesActions.storeIsSearchMode(text !== ""));
-  // };
 
   const filterArticle = (text) => {
     var filteredArticle = articles.filter(function (article) {
@@ -34,17 +26,17 @@ const ArticleHeader = (props) => {
   return (
     <header className={classes.header}>
       <nav>
-        <button onClick={props.onLogOut}>Logout</button>
-      </nav>
-      <nav>
         <h1>React Artiles</h1>
       </nav>
+      <nav></nav>
+      <nav></nav>
       <nav>
-        <SearchField
-          label="Search"
-          onChange={onChangeSearch}
-//onSubmit={onSubmitSearch}
-        />
+        <Link to="/login" onClick={props.onLogOut}>
+          LogOut
+        </Link>
+      </nav>
+      <nav>
+        <SearchField label="Search" onChange={onChangeSearch} />
       </nav>
     </header>
   );

@@ -32,7 +32,7 @@ const modal = (props) => {
     >
       <div className={cssClasses.join(" ")}>
         {!props.isLoading && (
-          <header style={{ fontWeight: "bold", backgroundColor: "#f1f3f4" }}>
+          <header className="headerModal">
             Message
           </header>
         )}

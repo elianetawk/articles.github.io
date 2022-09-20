@@ -17,15 +17,13 @@ const ArticleForm = () => {
     (state) => state.articles.displayedArticles
   );
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
 
+  const navigate = useNavigate();
   async function requestData() {
     setIsLoading(true);
-    console.log("requestData");
-    console.log(pageNum);
-    const response = await fetch(
+   const response = await fetch(
       "http://34.245.213.76:3000/articles?page=" + pageNum,
       {
         method: "GET",
@@ -37,7 +35,6 @@ const ArticleForm = () => {
     );
     const data = await response.json();
     setIsLoading(false);
-    console.log(data);
     if (data.status === "OK") {
       const loadedArticles = [];
 
@@ -66,8 +63,9 @@ const ArticleForm = () => {
       setModalMessage("Somthing is wrong");
       dispatch(articlesActions.storeArticles([]));
       dispatch(articlesActions.storeDisplayedArticles([]));
-      if (data.message == "Unauthorized") {
+      if (data.message === "Unauthorized") {
         logOut();
+        navigate("/login")
       }
     }
   }
@@ -82,17 +80,17 @@ const ArticleForm = () => {
   const closeModal = () => {
     setModalIsOpen(false);
   };
+
   const logOut = () => {
-    
     dispatch(articlesActions.logOut());
-    navigate("/login");
   };
+
   return (
     <div>
       <ArticleHeader onLogOut={logOut} />
 
       {displayedArticles.length === 0 && (
-        <div className={classes.naviator}>
+        <div className={classes.notfound}>
           <h1>Result Not Found</h1>
         </div>
       )}

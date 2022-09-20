@@ -24,12 +24,6 @@ const LogInForm = (props) => {
   };
   useEffect(() => {
     setIsValidForm(enteredUserName !== "" && enteredPassword !== "");
-    console.log("enteredUserName");
-    console.log(enteredUserName);
-    console.log("enteredPassword");
-    console.log(enteredPassword);
-    console.log("IsValidForm");
-    console.log(enteredUserName !== "" && enteredPassword !== "");
   }, [enteredPassword, enteredUserName]);
   const changePasswordHandler = (event) => {
     setInvalidCredentials(false);
@@ -48,7 +42,6 @@ const LogInForm = (props) => {
       },
     });
     const data = await response.json();
-    console.log(data);
     if (data["accessToken"]) {
       dispatch(logInActions.storeAccessToken(data["accessToken"]));
       navigate("/dashboard");
@@ -57,34 +50,20 @@ const LogInForm = (props) => {
     } else {
       setEnteredPassword("");
       setEnteredUserName("");
-      setErrorMessage(data.message);
+      setErrorMessage("Invalid UserName or Password");
       setInvalidCredentials(true);
     }
     setIsValidForm(enteredUserName !== "" && enteredPassword !== "");
     setIsLoading(false);
-    console.log("logInSubmit");
   }
   return (
     <main className={classes.auth}>
       <section>
-        <img
-          alt="logo"
-          style={{ width: "100%", height: "150px" }}
-          src={logo}
-        ></img>
-        <h1 style={{ color: "#69f5ee" }}>Log In</h1>
+        <img alt="logo" className={classes.loginlogo} src={logo}></img>
+        <h1 className={classes.logintext}>Log In</h1>
         <form onSubmit={logInSubmit}>
           <div className={classes.control}>
-            <label
-              style={{
-                color: "#69f5ee",
-                fontWeight: "bold",
-                textAlign: "left",
-              }}
-              htmlFor="Useranme"
-            >
-              User Name
-            </label>
+            <label htmlFor="Useranme">User Name</label>
             <input
               value={enteredUserName}
               onChange={changeUserNameHandler}
@@ -93,15 +72,7 @@ const LogInForm = (props) => {
             />
           </div>
           <div className={classes.control}>
-            <label
-              style={{
-                fontWeight: "bold",
-                textAlign: "left",
-              }}
-              htmlFor="password"
-            >
-              Password
-            </label>
+            <label htmlFor="password">Password</label>
             <input
               onChange={changePasswordHandler}
               type="password"
@@ -110,13 +81,13 @@ const LogInForm = (props) => {
             />
           </div>
           {invalidCredentials && (
-            <h1 style={{ color: "red" }}>{errorMessage}</h1>
+            <h1 className={classes.loginerror}>{errorMessage}</h1>
           )}
           <Modal isLoading={true} label="Loading ... " show={isLoading} />
           <Backdrop show={isLoading} />
 
           <button
-            style={{ backgroundColor: "#69f5ee" }}
+            className={classes.loginbutton}
             disabled={!isValidForm || isLoading}
           >
             Login

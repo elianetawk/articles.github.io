@@ -3,7 +3,7 @@ import ArticleItem from "./ArticleItem";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { articlesActions } from "../../store";
-import classes from "./ArticleHeader.module.css";
+import classes from "./ArticleItem.module.css";
 const ArticlesList = (props) => {
   const articles = useSelector((state) => state.articles.displayedArticles);
   const isSearchMode = useSelector((state) => state.articles.isSearchMode);
@@ -51,7 +51,7 @@ const ArticlesList = (props) => {
   return (
     <section>
       <div>
-        <ul style={{ height: "70px" }}></ul>
+        <ul className={classes.emptyItem}></ul>
         <ul>{list}</ul>
       </div>
     </section>
