@@ -1,15 +1,9 @@
 .header {
-    width: 100%;
-    height: 70px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #4d43e5;
-    color: white;
-    padding: 0 10%;
-    position: fixed;
-    top: 0px;
-    left: 0px;
+ 
+  position: fixed!important;
+  width: 100%;
+  background-color: #8082dd;
+  top:0px
   }
   
   .header a {
@@ -18,12 +12,22 @@
     font-size: 1.25rem;
   }
   
-  .header a:hover,
-  .header a:active {
-    color: #f7e702;
+  
+  
+  .inner-btn {
+    position: absolute;
+    width: 10px;
+    font-weight: 550;
+    border: none;
+    background-color: transparent;
+    line-height: 35px;
+    left: calc(100% - 30px);
+    z-index: 99999;
   }
   
-  
+  .inner-btn:hover {
+    color: blue;
+  }
  
  
   

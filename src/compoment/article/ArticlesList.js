@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { articlesActions } from "../../store";
 import classes from "./ArticleItem.module.css";
-const ArticlesList = (props) => {
+const ArticlesList = () => {
   const articles = useSelector((state) => state.articles.displayedArticles);
   const isSearchMode = useSelector((state) => state.articles.isSearchMode);
   const [isFetching, setIsFetching] = useState(false);

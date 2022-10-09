@@ -1,15 +1,18 @@
+
 import { createSlice, configureStore } from "@reduxjs/toolkit";
+import apiMiddleware from "../middleware/api";
 
 const initialLogInState = { accessToken: "" };
 const loginSlice = createSlice({
   name: "login",
   initialState: initialLogInState,
   reducers: {
-    storeAccessToken(state, action) {
+   setAccessToken(state, action) {
       state.accessToken = action.payload;
     },
   },
 });
+
 const initialArticlesState = {
   articles: [],
   displayedArticles: [],
@@ -21,10 +24,11 @@ const articlesSlice = createSlice({
   name: "articles",
   initialState: initialArticlesState,
   reducers: {
-    storeArticles(state, action) {
+    setArticles(state, action) {
       state.articles = action.payload;
     },
-    storeDisplayedArticles(state, action) {
+    
+    setDisplayedArticles(state, action) {
       state.displayedArticles = action.payload;
     },
     incrementPage(state) {
@@ -34,11 +38,17 @@ const articlesSlice = createSlice({
     storeIsSearchMode(state, action) {
       state.isSearchMode = action.payload;
     },
+
+    IsLoadingData(state, action) {
+      state.IsLoadingData = action.payload;
+    },
+
     logOut(state) {
       state.articles = [];
       state.displayedArticles = [];
       state.page = 0;
       state.isSearchMode = false;
+      state.IsLoadingData = false;
     },
   },
 });
@@ -48,6 +58,10 @@ const store = configureStore({
     login: loginSlice.reducer,
     articles: articlesSlice.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+  getDefaultMiddleware({
+    serializableCheck: false,
+  }).prepend(apiMiddleware),
 });
 export const logInActions = loginSlice.actions;
 export const articlesActions = articlesSlice.actions;

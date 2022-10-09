@@ -1,45 +1,35 @@
 import React from "react";
-import CSSTransition from "react-transition-group/CSSTransition";
-
-import "./Modal.css";
-
-
+import { Modal } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+ 
 
 const modal = (props) => {
-
-  const animationTiming = {
-    enter: 400,
-    exit: 1000,
-  };
-   
-  const cssClasses = [
-    props.isLoading ? "loading" : "Modal",
-    props.show ? "ModalOpen" : "ModalClosed",
-  ];
-
   return (
-    <CSSTransition
-      mountOnEnter
-      unmountOnExit
-      in={props.show}
-      timeout={animationTiming}
-      classNames={{
-        enter: "",
-        enterActive: "ModalOpen",
-        exit: "",
-        exitActive: "ModalClosed",
-      }}
+    <Modal
+      style={
+        !props.isLoading
+          ? {}
+          : {
+              "--bs-modal-width": "120px",
+            }
+      }
+      show={props.show}
+      onHide={props.closed}
     >
-      <div className={cssClasses.join(" ")}>
-        {!props.isLoading && (
-          <header className="headerModal">
-            Message
-          </header>
-        )}
-        <p>{props.label}</p>
-        {!props.isLoading && <button onClick={props.closed}>Close</button>}
-      </div>
-    </CSSTransition>
+      {!props.isLoading && (
+        <Modal.Header closeButton>
+          <Modal.Title>Message</Modal.Title>
+        </Modal.Header>
+      )}
+      <Modal.Body>{props.label}</Modal.Body>
+      {!props.isLoading && (
+        <Modal.Footer>
+          <Button variant="secondary" onClick={props.closed}>
+            Close
+          </Button>
+        </Modal.Footer>
+      )}
+    </Modal>
   );
 };
 
